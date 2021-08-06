@@ -93,7 +93,9 @@ const startRound = () => {
 }
 
 startButton.onclick = () => {
-    startRound();
+    if (!currentlyPlaying) {
+        startRound();
+    }
 }
 
 const gameOver = (status) => {
@@ -105,3 +107,4 @@ const gameOver = (status) => {
     currentlyPlaying = false;
 }
 
+startRound();
