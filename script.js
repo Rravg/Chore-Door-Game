@@ -19,7 +19,12 @@ let startButton = document.getElementById('start');
 
 let currentlyPlaying = true;
 
-
+let score = 0;
+let highScore = 0;
+let currentStreak = document.getElementById('score-number');
+let bestStreak = document.getElementById('high-score-number');
+currentStreak.innerHTML = score;
+bestStreak.innerHTML = highScore;
 
 const isBot = (door) => {
     if (door.src === botDoorPath) {
@@ -42,7 +47,7 @@ const playDoor = (door) => {
     if (numClosedDoors === 0) {
         gameOver('win');
     } else if (isBot(door)) {
-        gameOver('sd');
+        gameOver('lose');
     }
 }
 
@@ -105,11 +110,23 @@ startButton.onclick = () => {
 const gameOver = (status) => {
     if (status === 'win') {
         startButton.innerHTML = 'You win! Play again?';
+        getYourScore();
     } else {
         startButton.innerHTML = 'Game Over! Play again?';
+        score = 0;
+        currentStreak.innerHTML = score;
     }
     currentlyPlaying = false;
 }
+
+const getYourScore = () => {
+    score ++;
+    currentStreak.innerHTML = score;
+    if (score > highScore) {
+        highScore = score;
+        bestStreak.innerHTML = highScore;
+    }
+}  
 
 
 startRound();
