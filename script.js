@@ -2,6 +2,8 @@ let doorImage1 = document.getElementById('door1');
 let doorImage2 = document.getElementById('door2');
 let doorImage3 = document.getElementById('door3');
 
+let image1source = doorImage1.src;
+
 let botDoorPath = 'https://content.codecademy.com/projects/chore-door/images/robot.svg';
 let beachDoorPath = 'https://content.codecademy.com/projects/chore-door/images/beach.svg';
 let spaceDoorPath = 'https://content.codecademy.com/projects/chore-door/images/space.svg';
@@ -16,6 +18,8 @@ let closedDoorPath = 'https://content.codecademy.com/projects/chore-door/images/
 let startButton = document.getElementById('start');
 
 let currentlyPlaying = true;
+
+
 
 const isBot = (door) => {
     if (door.src === botDoorPath) {
@@ -38,13 +42,13 @@ const playDoor = (door) => {
     if (numClosedDoors === 0) {
         gameOver('win');
     } else if (isBot(door)) {
-        gameOver();
+        gameOver('sd');
     }
 }
 
 const randomChoreDoorGenerator = () => {
-    const choreDoor = Math.floor(Math.random() * numClosedDoors);
-    if (choreDoor === 0){
+    let choreDoor = Math.floor(Math.random() * numClosedDoors);
+    if (choreDoor === 0) {
         openDoor1 = botDoorPath;
         openDoor2 = beachDoorPath;
         openDoor3 = spaceDoorPath;
@@ -54,7 +58,7 @@ const randomChoreDoorGenerator = () => {
         openDoor1 = beachDoorPath;
         openDoor3 = spaceDoorPath;
 
-    } else if (choreDoor === 2) {
+    } else {
         openDoor3 = botDoorPath;
         openDoor1 = beachDoorPath;
         openDoor2 = spaceDoorPath;
@@ -62,30 +66,30 @@ const randomChoreDoorGenerator = () => {
 }
 
 doorImage1.onclick = () => {
-    if (!isClicked(doorImage1) && currentlyPlaying) {
+    if (currentlyPlaying && !isClicked(doorImage1)) {
         doorImage1.src = openDoor1;
         playDoor(doorImage1);
     }
 }
 
 doorImage2.onclick = () => {
-    if(!isClicked(doorImage2) && currentlyPlaying) {
+    if(currentlyPlaying && !isClicked(doorImage2)) {
         doorImage2.src = openDoor2;
         playDoor(doorImage2);
     }
 }
 
 doorImage3.onclick = () => {
-    if(!isClicked(doorImage3) && currentlyPlaying) {
+    if(currentlyPlaying && !isClicked(doorImage3)) {
         doorImage3.src = openDoor3;
         playDoor(doorImage3);
     }
 }
 
 const startRound = () => {
-    doorImage1 = closedDoorPath;
-    doorImage2 = closedDoorPath;
-    doorImage3 = closedDoorPath;
+    doorImage1.src = closedDoorPath;
+    doorImage2.src = closedDoorPath;
+    doorImage3.src = closedDoorPath;
     numClosedDoors = 3;
     startButton.innerHTML = 'Good Luck!'
     currentlyPlaying = true;
@@ -106,5 +110,6 @@ const gameOver = (status) => {
     }
     currentlyPlaying = false;
 }
+
 
 startRound();
