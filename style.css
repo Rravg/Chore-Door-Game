@@ -3,6 +3,11 @@ body {
     margin: 0px;
   }
 
+.attribution {
+    font-family: 'Space Mono';
+    color: white;
+}
+
 .header {
     background-color: #00ffff;
     text-align: center;
